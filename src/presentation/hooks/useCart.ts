@@ -49,7 +49,7 @@ export function useCart(): UseCartReturn {
 
   const total = useMemo(() => {
     return items.reduce((sum, item) => {
-      const numericPrice = parseFloat(item.product.price.replace(/[^0-9.]/g, ''))
+      const numericPrice = parseFloat((item.product.price ?? '0').replace(/[^0-9.]/g, ''))
       return sum + numericPrice * item.quantity
     }, 0)
   }, [items])

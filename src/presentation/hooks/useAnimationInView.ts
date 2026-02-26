@@ -20,7 +20,7 @@ export function useAnimationInView<T extends Element = HTMLDivElement>(
   const ref = useRef<T>(null)
   const isInView = useInView(ref, {
     once: options?.once ?? true,
-    margin: options?.margin ?? '-80px',
+    margin: (options?.margin ?? '-80px') as `${number}px`,
   })
 
   return { ref, isInView }

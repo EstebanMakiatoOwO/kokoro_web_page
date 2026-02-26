@@ -1,5 +1,3 @@
-import type { ScrollTrigger as ScrollTriggerPlugin } from 'gsap/ScrollTrigger'
-
 /** Fade up on scroll enter */
 export function scrollFadeUp(
   trigger: Element,
@@ -13,7 +11,7 @@ export function scrollFadeUp(
       trigger,
       start: 'top 88%',
       toggleActions: 'play none none none',
-    } satisfies ScrollTriggerPlugin.Vars,
+    },
   }
 }
 
@@ -31,7 +29,7 @@ export function parallaxDrift(
       start: 'top bottom',
       end: 'bottom top',
       scrub,
-    } satisfies ScrollTriggerPlugin.Vars,
+    },
   }
 }
 
@@ -48,6 +46,6 @@ export function scrollScaleIn(
       trigger,
       start: 'top 85%',
       toggleActions: 'play none none none',
-    } satisfies ScrollTriggerPlugin.Vars,
+    },
   }
 }
