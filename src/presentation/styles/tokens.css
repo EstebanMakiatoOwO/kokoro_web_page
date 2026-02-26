@@ -1,0 +1,54 @@
+/* Design tokens — CSS custom properties */
+
+:root {
+  /* ── Primary palette ─────────────────── */
+  --color-primary: #C47F6B;
+  --color-primary-light: #D4A090;
+  --color-primary-dark: #A66855;
+
+  /* ── Dark / text palette ─────────────── */
+  --color-dark: #2D2D2D;
+  --color-dark-muted: #7A7570;
+
+  /* ── Accent / surface palette ────────── */
+  --color-accent-bg: #FFFAF5;
+  --color-accent-surface: #FFF5EE;
+  --color-accent-border: #EDE3DC;
+
+  /* ── Semantic aliases ────────────────── */
+  --color-bg: var(--color-accent-bg);
+  --color-text: var(--color-dark);
+  --color-text-muted: var(--color-dark-muted);
+  --color-surface: var(--color-accent-surface);
+  --color-border: var(--color-accent-border);
+
+  /* ── Fonts ───────────────────────────── */
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+
+  /* ── Spacing ─────────────────────────── */
+  --section-padding-y: 6rem;
+  --section-padding-y-md: 8rem;
+  --container-max: 80rem;
+  --container-px: 1.5rem;
+
+  /* ── Shadows ─────────────────────────── */
+  --shadow-soft: 0 2px 16px rgba(0, 0, 0, 0.04);
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.06);
+
+  /* ── Border radius ───────────────────── */
+  --radius-card: 40px;
+  --radius-button: 9999px;
+  --radius-badge: 9999px;
+
+  /* ── Durations ───────────────────────── */
+  --duration-fast: 200ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+
+  /* ── Z-index ─────────────────────────── */
+  --z-navbar: 50;
+  --z-overlay: 40;
+  --z-content: 20;
+  --z-background: 10;
+}

@@ -16,6 +16,20 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
+    /* Path aliases */
+    "paths": {
+      "@domain/*": ["./src/domain/*"],
+      "@application/*": ["./src/application/*"],
+      "@infrastructure/*": ["./src/infrastructure/*"],
+      "@presentation/*": ["./src/presentation/*"],
+      "@components/*": ["./src/presentation/components/*"],
+      "@sections/*": ["./src/presentation/sections/*"],
+      "@hooks/*": ["./src/presentation/hooks/*"],
+      "@layouts/*": ["./src/presentation/layouts/*"],
+      "@animations/*": ["./src/presentation/animations/*"],
+      "@styles/*": ["./src/presentation/styles/*"]
+    },
+
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
