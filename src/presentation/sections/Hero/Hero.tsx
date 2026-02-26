@@ -7,6 +7,7 @@ import { useScrollAnimation } from '@hooks/index.ts'
 import { gsap } from '@infrastructure/gsap/index.ts'
 
 export function Hero() {
+  const sectionRef = useRef<HTMLElement>(null)
   const imageRef = useRef<HTMLDivElement>(null)
   const line1Ref = useRef<HTMLDivElement>(null)
   const line2Ref = useRef<HTMLDivElement>(null)
@@ -15,7 +16,7 @@ export function Hero() {
   const ctaRef = useRef<HTMLDivElement>(null)
   const overlayRef = useRef<HTMLDivElement>(null)
 
-  const sectionRef = useScrollAnimation<HTMLElement>(() => {
+  useScrollAnimation(sectionRef, () => {
     // ── Entrance Timeline ──────────────────────────────────────────
     const tl = gsap.timeline({
       defaults: { ease: 'power3.out' },

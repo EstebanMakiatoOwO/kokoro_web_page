@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import type { RefObject } from 'react'
 import { gsap, ScrollTrigger } from '@infrastructure/gsap/index.ts'
 
@@ -7,17 +7,16 @@ import { gsap, ScrollTrigger } from '@infrastructure/gsap/index.ts'
  * Automatically cleans up via gsap.context().revert() + ScrollTrigger.kill().
  */
 export function useScrollAnimation<T extends HTMLElement = HTMLElement>(
+  ref: RefObject<T | null>,
   setup: () => void,
   deps: unknown[] = []
-): RefObject<T | null> {
-  const sectionRef = useRef<T>(null)
-
+): void {
   useEffect(() => {
-    if (!sectionRef.current) return
+    if (!ref.current) return
 
     const ctx = gsap.context(() => {
       setup()
-    }, sectionRef)
+    }, ref)
 
     return () => {
       ctx.revert()
@@ -25,6 +24,4 @@ export function useScrollAnimation<T extends HTMLElement = HTMLElement>(
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps)
-
-  return sectionRef
 }

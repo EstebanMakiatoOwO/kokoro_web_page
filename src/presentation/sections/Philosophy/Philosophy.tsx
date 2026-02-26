@@ -12,9 +12,10 @@ const PHILOSOPHY_PILLARS = [
 ] as const
 
 export function Philosophy() {
+  const sectionRef = useRef<HTMLElement>(null)
   const imageRef = useRef<HTMLDivElement>(null)
 
-  const sectionRef = useScrollAnimation<HTMLElement>(() => {
+  useScrollAnimation(sectionRef, () => {
     if (imageRef.current && sectionRef.current) {
       gsap.to(imageRef.current, {
         yPercent: 12,

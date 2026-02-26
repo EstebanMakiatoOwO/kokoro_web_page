@@ -12,9 +12,10 @@ interface ProductGridProps {
 }
 
 export function ProductGrid({ onAddToCart }: ProductGridProps) {
+  const sectionRef = useRef<HTMLElement>(null)
   const cardsRef = useRef<(HTMLDivElement | null)[]>([])
 
-  const sectionRef = useScrollAnimation<HTMLElement>(() => {
+  useScrollAnimation(sectionRef, () => {
     cardsRef.current.forEach((card, i) => {
       if (!card) return
       gsap.from(card, {
