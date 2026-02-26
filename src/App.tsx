@@ -1,5 +1,5 @@
 // import { useCart } from '@hooks/index.ts'
-import { Navbar, Hero, ProductGrid, Philosophy, Footer } from '@sections/index.ts'
+import { Navbar, Hero, LogoBanner, ProductGrid, Philosophy, Footer } from '@sections/index.ts'
 import { PageLayout } from '@layouts/index.ts'
 
 function App() {
@@ -15,6 +15,7 @@ function App() {
         {/* <ProductGrid onAddToCart={actions.addToCart} /> */}
         <ProductGrid />
         <Philosophy />
+        <LogoBanner />
       </PageLayout>
       <Footer />
     </>
