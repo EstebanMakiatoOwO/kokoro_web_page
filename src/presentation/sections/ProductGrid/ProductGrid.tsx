@@ -1,17 +1,19 @@
 import { useRef } from 'react'
 import { m } from 'framer-motion'
-import { Button, Badge } from '@components/ui/index.ts'
+// import { Button, Badge } from '@components/ui/index.ts'
+import { Badge } from '@components/ui/index.ts'
 import { PRODUCTS } from '@application/data/index.ts'
 import type { Product } from '@domain/types/index.ts'
 import { useScrollAnimation } from '@hooks/index.ts'
 import { gsap } from '@infrastructure/gsap/index.ts'
 import { springTransition } from '@animations/index.ts'
 
-interface ProductGridProps {
-  onAddToCart: (product: Product) => void
-}
+// interface ProductGridProps {
+//   onAddToCart: (product: Product) => void
+// }
 
-export function ProductGrid({ onAddToCart }: ProductGridProps) {
+// export function ProductGrid({ onAddToCart }: ProductGridProps) {
+export function ProductGrid() {
   const sectionRef = useRef<HTMLElement>(null)
   const cardsRef = useRef<(HTMLDivElement | null)[]>([])
 
@@ -46,7 +48,7 @@ export function ProductGrid({ onAddToCart }: ProductGridProps) {
             Colección
           </p>
           <h2 className="font-heading text-4xl md:text-5xl font-semibold text-kokoro-text">
-            Rituales de cuidado
+            Nuestros productos
           </h2>
         </div>
 
@@ -57,7 +59,9 @@ export function ProductGrid({ onAddToCart }: ProductGridProps) {
               key={product.id}
               ref={el => { cardsRef.current[index] = el }}
             >
-              <ProductCard product={product} onAddToCart={onAddToCart} />
+              {/* onAddToCart comentado — descomentar si se activa e-commerce */}
+              {/* <ProductCard product={product} onAddToCart={onAddToCart} /> */}
+              <ProductCard product={product} />
             </div>
           ))}
         </div>
@@ -68,12 +72,17 @@ export function ProductGrid({ onAddToCart }: ProductGridProps) {
 
 // ── ProductCard ────────────────────────────────────────────────────────────────
 
+// interface ProductCardProps {
+//   product: Product
+//   onAddToCart: (product: Product) => void
+// }
+
 interface ProductCardProps {
   product: Product
-  onAddToCart: (product: Product) => void
 }
 
-function ProductCard({ product, onAddToCart }: ProductCardProps) {
+// function ProductCard({ product, onAddToCart }: ProductCardProps) {
+function ProductCard({ product }: ProductCardProps) {
   return (
     <m.div
       className="group bg-kokoro-surface rounded-[40px] overflow-hidden
@@ -100,24 +109,26 @@ function ProductCard({ product, onAddToCart }: ProductCardProps) {
 
       {/* Content */}
       <div className="p-6 flex flex-col flex-1 gap-3">
-        <div className="flex items-start justify-between gap-3">
-          <div>
-            <p className="text-xs text-kokoro-muted tracking-widest uppercase mb-1">
-              {product.category}
-            </p>
-            <h3 className="font-heading text-xl font-medium text-kokoro-text">
-              {product.name}
-            </h3>
-          </div>
-          <span className="font-heading text-lg font-semibold text-kokoro-primary whitespace-nowrap">
-            {product.price}
-          </span>
+        <div>
+          <p className="text-xs text-kokoro-muted tracking-widest uppercase mb-1">
+            {product.category}
+          </p>
+          <h3 className="font-heading text-xl font-medium text-kokoro-text">
+            {product.name}
+          </h3>
         </div>
+
+        {/* Precio comentado — descomentar si se activa e-commerce
+        <span className="font-heading text-lg font-semibold text-kokoro-primary whitespace-nowrap">
+          {product.price}
+        </span>
+        */}
 
         <p className="text-sm text-kokoro-muted leading-relaxed flex-1">
           {product.subtitle}
         </p>
 
+        {/* Botón de carrito comentado — descomentar si se activa e-commerce
         <Button
           variant="secondary"
           className="w-full mt-2"
@@ -126,6 +137,7 @@ function ProductCard({ product, onAddToCart }: ProductCardProps) {
         >
           Agregar al carrito
         </Button>
+        */}
       </div>
     </m.div>
   )

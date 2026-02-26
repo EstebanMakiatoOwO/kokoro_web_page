@@ -1,16 +1,18 @@
 import { useState } from 'react'
 import { m, useScroll, useMotionValueEvent } from 'framer-motion'
-import { ShoppingBag, Menu, X } from 'lucide-react'
+// import { ShoppingBag, Menu, X } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { Icon } from '@components/ui/index.ts'
 import { NAV_LINKS } from '@application/constants/index.ts'
 import { BRAND_IDENTITY } from '../../../constants/brand.ts'
-import { springTransition } from '@animations/index.ts'
+// import { springTransition } from '@animations/index.ts'
 
-interface NavbarProps {
-  cartItemCount: number
-}
+// interface NavbarProps {
+//   cartItemCount: number
+// }
 
-export function Navbar({ cartItemCount }: NavbarProps) {
+// export function Navbar({ cartItemCount }: NavbarProps) {
+export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const { scrollY } = useScroll()
@@ -50,7 +52,17 @@ export function Navbar({ cartItemCount }: NavbarProps) {
           ))}
         </ul>
 
-        {/* Cart icon + hamburger */}
+        {/* Hamburger */}
+        <button
+          className="md:hidden p-1 text-kokoro-text
+                     focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-kokoro-primary"
+          aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
+          onClick={() => setMenuOpen(prev => !prev)}
+        >
+          <Icon icon={menuOpen ? X : Menu} size={22} />
+        </button>
+
+        {/* Cart icon — comentado por ahora, descomentar si se activa e-commerce
         <div className="flex items-center gap-4">
           <button
             className="relative p-1 text-kokoro-text hover:text-kokoro-primary transition-colors duration-200
@@ -72,16 +84,8 @@ export function Navbar({ cartItemCount }: NavbarProps) {
               </m.span>
             )}
           </button>
-
-          <button
-            className="md:hidden p-1 text-kokoro-text
-                       focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-kokoro-primary"
-            aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
-            onClick={() => setMenuOpen(prev => !prev)}
-          >
-            <Icon icon={menuOpen ? X : Menu} size={22} />
-          </button>
         </div>
+        */}
       </nav>
 
       {/* Mobile dropdown menu */}
