@@ -1,0 +1,5 @@
+export { Navbar } from './Navbar/index.ts'
+export { Hero } from './Hero/index.ts'
+export { ProductGrid } from './ProductGrid/index.ts'
+export { Philosophy } from './Philosophy/index.ts'
+export { Footer } from './Footer/index.ts'
