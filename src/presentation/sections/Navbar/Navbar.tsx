@@ -32,12 +32,7 @@ export function Navbar({ cartItemCount }: NavbarProps) {
       <nav className="max-w-7xl mx-auto px-6 flex items-center justify-between" aria-label="Navegación principal">
         {/* Logo */}
         <a href="#hero" className="flex items-baseline gap-2 group">
-          <span className="font-heading text-2xl font-semibold text-kokoro-primary tracking-tight">
-            {BRAND_IDENTITY.name}
-          </span>
-          <span className="text-kokoro-muted text-xl group-hover:text-kokoro-primary transition-colors duration-300">
-            {BRAND_IDENTITY.nameKanji}
-          </span>
+          <img src={`${import.meta.env.BASE_URL}Kokoro_logo_letras.png`} alt={BRAND_IDENTITY.name} className='h-7 w-auto'/>
         </a>
 
         {/* Desktop navigation */}
