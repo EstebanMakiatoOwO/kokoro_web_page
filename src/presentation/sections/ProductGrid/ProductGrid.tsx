@@ -1,5 +1,5 @@
-import { useRef } from 'react'
-import { m } from 'framer-motion'
+import { useRef, useMemo, useState } from 'react'
+import { m, AnimatePresence } from 'framer-motion'
 // import { Button, Badge } from '@components/ui/index.ts'
 import { Badge } from '@components/ui/index.ts'
 import { PRODUCTS } from '@application/data/index.ts'
@@ -7,6 +7,8 @@ import type { Product } from '@domain/types/index.ts'
 import { useScrollAnimation } from '@hooks/index.ts'
 import { gsap } from '@infrastructure/gsap/index.ts'
 import { springTransition } from '@animations/index.ts'
+
+const ALL_CATEGORY = 'Todos'
 
 // interface ProductGridProps {
 //   onAddToCart: (product: Product) => void
@@ -16,6 +18,19 @@ import { springTransition } from '@animations/index.ts'
 export function ProductGrid() {
   const sectionRef = useRef<HTMLElement>(null)
   const cardsRef = useRef<(HTMLDivElement | null)[]>([])
+  const [activeCategory, setActiveCategory] = useState(ALL_CATEGORY)
+
+  const categories = useMemo(() => {
+    const unique = [...new Set(PRODUCTS.map(p => p.category))]
+    return [ALL_CATEGORY, ...unique]
+  }, [])
+
+  const filteredProducts = useMemo(
+    () => activeCategory === ALL_CATEGORY
+      ? PRODUCTS
+      : PRODUCTS.filter(p => p.category === activeCategory),
+    [activeCategory],
+  )
 
   useScrollAnimation(sectionRef, () => {
     cardsRef.current.forEach((card, i) => {
@@ -43,7 +58,7 @@ export function ProductGrid() {
     >
       <div className="max-w-7xl mx-auto px-6">
         {/* Section header */}
-        <div className="mb-16 md:mb-20">
+        <div className="mb-10 md:mb-14">
           <p className="text-kokoro-muted text-xs tracking-[0.3em] uppercase mb-3">
             Colección
           </p>
@@ -52,19 +67,48 @@ export function ProductGrid() {
           </h2>
         </div>
 
-        {/* Product cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {PRODUCTS.map((product, index) => (
-            <div
-              key={product.id}
-              ref={el => { cardsRef.current[index] = el }}
+        {/* Category chips */}
+        <div className="flex flex-wrap gap-3 mb-12">
+          {categories.map(category => (
+            <button
+              key={category}
+              onClick={() => setActiveCategory(category)}
+              className={`
+                px-5 py-2 rounded-full text-sm font-medium transition-all duration-300
+                border
+                ${activeCategory === category
+                  ? 'bg-kokoro-primary text-white border-kokoro-primary'
+                  : 'bg-kokoro-surface text-kokoro-muted border-kokoro-border hover:border-kokoro-primary/40 hover:text-kokoro-text'
+                }
+              `}
             >
-              {/* onAddToCart comentado — descomentar si se activa e-commerce */}
-              {/* <ProductCard product={product} onAddToCart={onAddToCart} /> */}
-              <ProductCard product={product} />
-            </div>
+              {category}
+            </button>
           ))}
         </div>
+
+        {/* Product cards */}
+        <AnimatePresence mode="wait">
+          <m.div
+            key={activeCategory}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            {filteredProducts.map((product, index) => (
+              <div
+                key={product.id}
+                ref={el => { cardsRef.current[index] = el }}
+              >
+                {/* onAddToCart comentado — descomentar si se activa e-commerce */}
+                {/* <ProductCard product={product} onAddToCart={onAddToCart} /> */}
+                <ProductCard product={product} />
+              </div>
+            ))}
+          </m.div>
+        </AnimatePresence>
       </div>
     </section>
   )
@@ -83,6 +127,8 @@ interface ProductCardProps {
 
 // function ProductCard({ product, onAddToCart }: ProductCardProps) {
 function ProductCard({ product }: ProductCardProps) {
+  const imageSrc = `${import.meta.env.BASE_URL}products/${product.image.replace('/products/', '')}`
+
   return (
     <m.div
       className="group bg-kokoro-surface rounded-[40px] overflow-hidden
@@ -94,7 +140,7 @@ function ProductCard({ product }: ProductCardProps) {
       {/* Image */}
       <div className="relative overflow-hidden aspect-4/3">
         <m.img
-          src={product.image}
+          src={imageSrc}
           alt={product.name}
           className="w-full h-full object-cover"
           whileHover={{ scale: 1.04 }}
