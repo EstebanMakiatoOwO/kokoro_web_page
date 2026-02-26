@@ -1,14 +1,19 @@
-import './App.css'
+import { useCart } from '@hooks/index.ts'
+import { Navbar, Hero, ProductGrid, Philosophy, Footer } from '@sections/index.ts'
+import { PageLayout } from '@layouts/index.ts'
 
 function App() {
+  const { itemCount, actions } = useCart()
 
   return (
     <>
-      <div>
-        <h1 className="text-3xl font-bold underline">
-          Hello world!
-        </h1>
-      </div>
+      <Navbar cartItemCount={itemCount} />
+      <PageLayout>
+        <Hero />
+        <ProductGrid onAddToCart={actions.addToCart} />
+        <Philosophy />
+      </PageLayout>
+      <Footer />
     </>
   )
 }

@@ -1,9 +1,9 @@
 export const BRAND_IDENTITY = {
   name: 'KOKORO',
   nameKanji: '心',
-  tagline: '心 — La esencia de la belleza, desde adentro.',
-  subtagline: 'Cosméticos de lujo japonés creados con intención.',
-  philosophy: 'Creemos que la belleza no es una máscara, sino un ritual. Cada fórmula nace de siglos de sabiduría botánica japonesa, destilada en su forma más pura.',
+  tagline: '心 — Tu tienda de belleza.',
+  subtagline: 'Cosméticos premium seleccionados con intención para tu ritual de belleza.',
+  philosophy: 'En KOKORO seleccionamos las mejores marcas de cosmética para ti. Cada producto en nuestra tienda ha sido cuidadosamente elegido para ofrecerte calidad, resultados reales y una experiencia de compra que se siente como un ritual.',
   colors: {
     bg: '#FFFAF5',
     primary: '#C47F6B',
@@ -40,7 +40,7 @@ export const PRODUCT_CATALOG: Product[] = [
   {
     id: 1,
     name: 'Sakura Serum',
-    subtitle: 'Esencia de flor de cerezo con ácido hialurónico para renovación celular profunda',
+    subtitle: 'Sérum de flor de cerezo con ácido hialurónico para renovación celular profunda',
     price: '$1,290',
     category: 'Sérum',
     image: 'https://picsum.photos/seed/kokoro-serum/600/800',
