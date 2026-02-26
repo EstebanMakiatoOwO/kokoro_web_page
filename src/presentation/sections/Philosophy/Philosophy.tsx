@@ -46,7 +46,7 @@ export function Philosophy() {
               className="absolute inset-0 scale-110 will-change-transform"
             >
               <img
-                src="https://picsum.photos/seed/kokoro-philosophy/800/900"
+                src={`${import.meta.env.BASE_URL}Kokoro_nosotros.webp`}
                 alt="Tienda KOKORO en Tuxtla"
                 className="w-full h-full object-cover"
               />
