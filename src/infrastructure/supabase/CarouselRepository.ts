@@ -1,21 +1,33 @@
 import { supabase } from './client.ts'
 import { mapCarouselSlide } from './mappers.ts'
+import { cache } from '../cache/index.ts'
 import type { CarouselSlide, CarouselSlideInput } from '@domain/types/index.ts'
 import type { ICarouselRepository } from '@domain/repositories/index.ts'
 import type { CarouselSlideRow } from './mappers.ts'
 
+const CACHE_KEY_ALL = 'carousel:all'
+const CACHE_KEY_ACTIVE = 'carousel:active'
+
 export class CarouselRepository implements ICarouselRepository {
   async getAll(): Promise<CarouselSlide[]> {
+    const cached = cache.get<CarouselSlide[]>(CACHE_KEY_ALL)
+    if (cached) return cached
+
     const { data, error } = await supabase
       .from('carousel_slides')
       .select('*')
       .order('sort_order', { ascending: true })
 
     if (error) throw error
-    return (data as CarouselSlideRow[]).map(mapCarouselSlide)
+    const slides = (data as CarouselSlideRow[]).map(mapCarouselSlide)
+    cache.set(CACHE_KEY_ALL, slides)
+    return slides
   }
 
   async getActive(): Promise<CarouselSlide[]> {
+    const cached = cache.get<CarouselSlide[]>(CACHE_KEY_ACTIVE)
+    if (cached) return cached
+
     const { data, error } = await supabase
       .from('carousel_slides')
       .select('*')
@@ -23,7 +35,9 @@ export class CarouselRepository implements ICarouselRepository {
       .order('sort_order', { ascending: true })
 
     if (error) throw error
-    return (data as CarouselSlideRow[]).map(mapCarouselSlide)
+    const slides = (data as CarouselSlideRow[]).map(mapCarouselSlide)
+    cache.set(CACHE_KEY_ACTIVE, slides)
+    return slides
   }
 
   async create(input: CarouselSlideInput): Promise<CarouselSlide> {
@@ -42,6 +56,7 @@ export class CarouselRepository implements ICarouselRepository {
       .single()
 
     if (error) throw error
+    cache.invalidateByPrefix('carousel:')
     return mapCarouselSlide(data as CarouselSlideRow)
   }
 
@@ -63,6 +78,7 @@ export class CarouselRepository implements ICarouselRepository {
       .single()
 
     if (error) throw error
+    cache.invalidateByPrefix('carousel:')
     return mapCarouselSlide(data as CarouselSlideRow)
   }
 
@@ -73,5 +89,6 @@ export class CarouselRepository implements ICarouselRepository {
       .eq('id', id)
 
     if (error) throw error
+    cache.invalidateByPrefix('carousel:')
   }
 }
