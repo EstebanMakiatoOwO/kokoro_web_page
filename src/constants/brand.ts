@@ -25,7 +25,7 @@ export const BRAND_IDENTITY = {
   },
 } as const
 
-export interface Product {
+export interface StaticProduct {
   id: number
   name: string
   subtitle: string
@@ -36,7 +36,7 @@ export interface Product {
   featured?: boolean
 }
 
-export const PRODUCT_CATALOG: Product[] = [
+export const PRODUCT_CATALOG: StaticProduct[] = [
   {
     id: 1,
     name: 'Bases de Colores',
