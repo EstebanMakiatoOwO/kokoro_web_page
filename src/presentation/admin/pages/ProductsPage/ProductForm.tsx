@@ -1,8 +1,30 @@
 import { useState } from 'react'
 import { Input, Textarea, Switch, Button } from '@components/ui/index.ts'
+import { Select } from '@components/ui/Select/index.ts'
 import { ImageUploader } from '../../components/ImageUploader/index.ts'
 import type { Product } from '@domain/types/index.ts'
 import type { ProductInput } from '@domain/repositories/index.ts'
+
+const CATEGORY_OPTIONS = [
+  { value: 'Labios', label: 'Labios' },
+  { value: 'Ojos', label: 'Ojos' },
+  { value: 'Rostro', label: 'Rostro' },
+  { value: 'Bases', label: 'Bases' },
+  { value: 'Rubor', label: 'Rubor' },
+  { value: 'Corrector', label: 'Corrector' },
+  { value: 'Cejas', label: 'Cejas' },
+  { value: 'Skincare', label: 'Skincare' },
+  { value: 'Accesorios', label: 'Accesorios' },
+]
+
+const TAG_OPTIONS = [
+  { value: '', label: 'Sin tag' },
+  { value: 'Nuevo', label: 'Nuevo' },
+  { value: 'Popular', label: 'Popular' },
+  { value: 'Oferta', label: 'Oferta' },
+  { value: 'Más vendido', label: 'Más vendido' },
+  { value: 'Edición limitada', label: 'Edición limitada' },
+]
 
 interface ProductFormProps {
   product?: Product
@@ -47,11 +69,11 @@ export function ProductForm({ product, onSubmit, onCancel }: ProductFormProps) {
       <Input label="Nombre" value={name} onChange={e => setName(e.target.value)} required />
       <Textarea label="Descripción" value={subtitle} onChange={e => setSubtitle(e.target.value)} required />
       <div className="grid grid-cols-2 gap-4">
-        <Input label="Categoría" value={category} onChange={e => setCategory(e.target.value)} required />
+        <Select label="Categoría" value={category} onChange={e => setCategory(e.target.value)} options={CATEGORY_OPTIONS} required />
         <Input label="Precio (opcional)" value={price} onChange={e => setPrice(e.target.value)} placeholder="$199" />
       </div>
       <div className="grid grid-cols-2 gap-4">
-        <Input label="Tag (opcional)" value={tag} onChange={e => setTag(e.target.value)} placeholder="Nuevo, Popular..." />
+        <Select label="Tag (opcional)" value={tag} onChange={e => setTag(e.target.value)} options={TAG_OPTIONS} placeholder="Sin tag" />
         <Input label="Orden" type="number" value={String(sortOrder)} onChange={e => setSortOrder(Number(e.target.value))} />
       </div>
       <ImageUploader bucket="product-images" currentUrl={imageUrl} onUploaded={setImageUrl} />
