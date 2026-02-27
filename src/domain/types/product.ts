@@ -1,8 +1,18 @@
-import type { Product } from '../../constants/brand.ts'
+export interface Product {
+  readonly id: string
+  readonly name: string
+  readonly subtitle: string
+  readonly price?: string
+  readonly category: string
+  readonly imageUrl: string
+  readonly tag?: string
+  readonly featured: boolean
+  readonly sortOrder: number
+  readonly active: boolean
+  readonly createdAt: string
+  readonly updatedAt: string
+}
 
-export type { Product }
-
-// No se usa de momento, pero se mantiene para cuando se active e-commerce
 export interface CartItem {
   product: Product
   quantity: number
