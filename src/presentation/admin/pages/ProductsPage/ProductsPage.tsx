@@ -10,7 +10,7 @@ import type { ProductInput } from '@domain/repositories/index.ts'
 type View = 'list' | 'create' | 'edit'
 
 export function ProductsPage() {
-  const { products, loading, create, update, remove } = useProducts()
+  const { products, loading, create, update, remove } = useProducts({ useCache: false })
   const [view, setView] = useState<View>('list')
   const [editing, setEditing] = useState<Product | undefined>()
   const [deleting, setDeleting] = useState<Product | null>(null)

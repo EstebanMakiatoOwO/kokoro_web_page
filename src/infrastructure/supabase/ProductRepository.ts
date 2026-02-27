@@ -1,33 +1,21 @@
 import { supabase } from './client.ts'
 import { mapProduct } from './mappers.ts'
-import { cache } from '../cache/index.ts'
 import type { Product } from '@domain/types/index.ts'
 import type { IProductRepository, ProductInput } from '@domain/repositories/index.ts'
 import type { ProductRow } from './mappers.ts'
 
-const CACHE_KEY_ALL = 'products:all'
-const CACHE_KEY_ACTIVE = 'products:active'
-
 export class ProductRepository implements IProductRepository {
   async getAll(): Promise<Product[]> {
-    const cached = cache.get<Product[]>(CACHE_KEY_ALL)
-    if (cached) return cached
-
     const { data, error } = await supabase
       .from('products')
       .select('*')
       .order('sort_order', { ascending: true })
 
     if (error) throw error
-    const products = (data as ProductRow[]).map(mapProduct)
-    cache.set(CACHE_KEY_ALL, products)
-    return products
+    return (data as ProductRow[]).map(mapProduct)
   }
 
   async getActive(): Promise<Product[]> {
-    const cached = cache.get<Product[]>(CACHE_KEY_ACTIVE)
-    if (cached) return cached
-
     const { data, error } = await supabase
       .from('products')
       .select('*')
@@ -35,9 +23,7 @@ export class ProductRepository implements IProductRepository {
       .order('sort_order', { ascending: true })
 
     if (error) throw error
-    const products = (data as ProductRow[]).map(mapProduct)
-    cache.set(CACHE_KEY_ACTIVE, products)
-    return products
+    return (data as ProductRow[]).map(mapProduct)
   }
 
   async getById(id: string): Promise<Product | null> {
@@ -72,7 +58,6 @@ export class ProductRepository implements IProductRepository {
       .single()
 
     if (error) throw error
-    cache.invalidateByPrefix('products:')
     return mapProduct(data as ProductRow)
   }
 
@@ -96,7 +81,6 @@ export class ProductRepository implements IProductRepository {
       .single()
 
     if (error) throw error
-    cache.invalidateByPrefix('products:')
     return mapProduct(data as ProductRow)
   }
 
@@ -107,6 +91,5 @@ export class ProductRepository implements IProductRepository {
       .eq('id', id)
 
     if (error) throw error
-    cache.invalidateByPrefix('products:')
   }
 }

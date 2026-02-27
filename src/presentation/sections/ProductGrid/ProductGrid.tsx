@@ -19,7 +19,7 @@ export function ProductGrid() {
   const sectionRef = useRef<HTMLElement>(null)
   const cardsRef = useRef<(HTMLDivElement | null)[]>([])
   const [activeCategory, setActiveCategory] = useState(ALL_CATEGORY)
-  const { products, loading, error } = useProducts(true)
+  const { products, loading, error } = useProducts({ activeOnly: true })
 
   const categories = useMemo(() => {
     const unique = [...new Set(products.map(p => p.category))]

@@ -5,7 +5,7 @@ import { Icon } from '@components/ui/index.ts'
 import { useCarousel, useSettings } from '@hooks/index.ts'
 
 export function Carousel() {
-  const { slides, loading: slidesLoading } = useCarousel(true)
+  const { slides, loading: slidesLoading } = useCarousel({ activeOnly: true })
   const { settings, loading: settingsLoading } = useSettings()
   const [current, setCurrent] = useState(0)
 

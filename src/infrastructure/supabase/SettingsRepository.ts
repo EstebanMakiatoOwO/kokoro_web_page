@@ -1,17 +1,11 @@
 import { supabase } from './client.ts'
 import { mapSiteSettings } from './mappers.ts'
-import { cache } from '../cache/index.ts'
 import type { SiteSettings } from '@domain/types/index.ts'
 import type { ISettingsRepository } from '@domain/repositories/index.ts'
 import type { SiteSettingsRow } from './mappers.ts'
 
-const CACHE_KEY = 'settings'
-
 export class SettingsRepository implements ISettingsRepository {
   async get(): Promise<SiteSettings> {
-    const cached = cache.get<SiteSettings>(CACHE_KEY)
-    if (cached) return cached
-
     const { data, error } = await supabase
       .from('site_settings')
       .select('*')
@@ -19,9 +13,7 @@ export class SettingsRepository implements ISettingsRepository {
       .single()
 
     if (error) throw error
-    const settings = mapSiteSettings(data as SiteSettingsRow)
-    cache.set(CACHE_KEY, settings)
-    return settings
+    return mapSiteSettings(data as SiteSettingsRow)
   }
 
   async update(settings: Partial<Pick<SiteSettings, 'carouselEnabled'>>): Promise<SiteSettings> {
@@ -42,7 +34,6 @@ export class SettingsRepository implements ISettingsRepository {
       .single()
 
     if (error) throw error
-    cache.invalidate(CACHE_KEY)
     return mapSiteSettings(data as SiteSettingsRow)
   }
 }

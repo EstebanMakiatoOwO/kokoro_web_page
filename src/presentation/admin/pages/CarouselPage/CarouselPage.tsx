@@ -9,8 +9,8 @@ import type { CarouselSlide, CarouselSlideInput } from '@domain/types/index.ts'
 type View = 'list' | 'create' | 'edit'
 
 export function CarouselPage() {
-  const { slides, loading, create, update, remove } = useCarousel()
-  const { settings, updateSettings } = useSettings()
+  const { slides, loading, create, update, remove } = useCarousel({ useCache: false })
+  const { settings, updateSettings } = useSettings({ useCache: false })
   const [view, setView] = useState<View>('list')
   const [editing, setEditing] = useState<CarouselSlide | undefined>()
   const [deleting, setDeleting] = useState<CarouselSlide | null>(null)

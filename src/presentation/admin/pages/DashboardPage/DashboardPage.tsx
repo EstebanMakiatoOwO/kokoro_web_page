@@ -2,9 +2,9 @@ import { useProducts, useCarousel, useSettings } from '@hooks/index.ts'
 import { Switch } from '@components/ui/index.ts'
 
 export function DashboardPage() {
-  const { products, loading: pLoading } = useProducts()
-  const { slides, loading: cLoading } = useCarousel()
-  const { settings, loading: sLoading, updateSettings } = useSettings()
+  const { products, loading: pLoading } = useProducts({ useCache: false })
+  const { slides, loading: cLoading } = useCarousel({ useCache: false })
+  const { settings, loading: sLoading, updateSettings } = useSettings({ useCache: false })
 
   const loading = pLoading || cLoading || sLoading
 
