@@ -127,8 +127,6 @@ interface ProductCardProps {
 
 // function ProductCard({ product, onAddToCart }: ProductCardProps) {
 function ProductCard({ product }: ProductCardProps) {
-  const imageSrc = `${import.meta.env.BASE_URL}products/${product.image.replace('/products/', '')}`
-
   return (
     <m.div
       className="group bg-kokoro-surface rounded-[40px] overflow-hidden
@@ -140,7 +138,7 @@ function ProductCard({ product }: ProductCardProps) {
       {/* Image */}
       <div className="relative overflow-hidden aspect-4/3">
         <m.img
-          src={imageSrc}
+          src={product.imageUrl}
           alt={product.name}
           className="w-full h-full object-cover"
           whileHover={{ scale: 1.04 }}
