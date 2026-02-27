@@ -21,6 +21,7 @@ export default defineConfig({
       '@layouts': resolve(__dirname, 'src/presentation/layouts'),
       '@animations': resolve(__dirname, 'src/presentation/animations'),
       '@styles': resolve(__dirname, 'src/presentation/styles'),
+      '@admin': resolve(__dirname, 'src/presentation/admin'),
     },
   },
 })
