@@ -8,7 +8,7 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
-  base: '/kokoro_web_page/',
+  base: process.env.VITE_BASE_PATH ?? '/',
   resolve: {
     alias: {
       '@domain': resolve(__dirname, 'src/domain'),
