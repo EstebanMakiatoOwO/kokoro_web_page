@@ -2,7 +2,7 @@ import { useRef, useMemo, useState } from 'react'
 import { m, AnimatePresence } from 'framer-motion'
 // import { Button, Badge } from '@components/ui/index.ts'
 import { Badge } from '@components/ui/index.ts'
-import { PRODUCTS } from '@application/data/index.ts'
+import { useProducts } from '@hooks/index.ts'
 import type { Product } from '@domain/types/index.ts'
 import { useScrollAnimation } from '@hooks/index.ts'
 import { gsap } from '@infrastructure/gsap/index.ts'
@@ -19,17 +19,18 @@ export function ProductGrid() {
   const sectionRef = useRef<HTMLElement>(null)
   const cardsRef = useRef<(HTMLDivElement | null)[]>([])
   const [activeCategory, setActiveCategory] = useState(ALL_CATEGORY)
+  const { products, loading, error } = useProducts({ activeOnly: true })
 
   const categories = useMemo(() => {
-    const unique = [...new Set(PRODUCTS.map(p => p.category))]
+    const unique = [...new Set(products.map(p => p.category))]
     return [ALL_CATEGORY, ...unique]
-  }, [])
+  }, [products])
 
   const filteredProducts = useMemo(
     () => activeCategory === ALL_CATEGORY
-      ? PRODUCTS
-      : PRODUCTS.filter(p => p.category === activeCategory),
-    [activeCategory],
+      ? products
+      : products.filter(p => p.category === activeCategory),
+    [activeCategory, products],
   )
 
   useScrollAnimation(sectionRef, () => {
@@ -49,6 +50,50 @@ export function ProductGrid() {
       })
     })
   })
+
+  if (loading) {
+    return (
+      <section id="products" className="section-padding bg-kokoro-bg">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="mb-10 md:mb-14">
+            <p className="text-kokoro-muted text-xs tracking-[0.3em] uppercase mb-3">
+              Colección
+            </p>
+            <h2 className="font-heading text-4xl md:text-5xl font-semibold text-kokoro-text">
+              Nuestros productos
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div
+                key={i}
+                className="bg-kokoro-surface rounded-[40px] overflow-hidden border border-kokoro-border animate-pulse"
+              >
+                <div className="aspect-4/3 bg-kokoro-border" />
+                <div className="p-6 space-y-3">
+                  <div className="h-3 w-16 bg-kokoro-border rounded" />
+                  <div className="h-5 w-3/4 bg-kokoro-border rounded" />
+                  <div className="h-4 w-full bg-kokoro-border rounded" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  if (error) {
+    return (
+      <section id="products" className="section-padding bg-kokoro-bg">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <p className="text-kokoro-muted">No se pudieron cargar los productos.</p>
+        </div>
+      </section>
+    )
+  }
+
+  if (products.length === 0) return null
 
   return (
     <section
@@ -127,8 +172,6 @@ interface ProductCardProps {
 
 // function ProductCard({ product, onAddToCart }: ProductCardProps) {
 function ProductCard({ product }: ProductCardProps) {
-  const imageSrc = `${import.meta.env.BASE_URL}products/${product.image.replace('/products/', '')}`
-
   return (
     <m.div
       className="group bg-kokoro-surface rounded-[40px] overflow-hidden
@@ -140,7 +183,7 @@ function ProductCard({ product }: ProductCardProps) {
       {/* Image */}
       <div className="relative overflow-hidden aspect-4/3">
         <m.img
-          src={imageSrc}
+          src={product.imageUrl}
           alt={product.name}
           className="w-full h-full object-cover"
           whileHover={{ scale: 1.04 }}

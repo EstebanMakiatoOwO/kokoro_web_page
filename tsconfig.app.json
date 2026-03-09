@@ -27,7 +27,8 @@
       "@hooks/*": ["./src/presentation/hooks/*"],
       "@layouts/*": ["./src/presentation/layouts/*"],
       "@animations/*": ["./src/presentation/animations/*"],
-      "@styles/*": ["./src/presentation/styles/*"]
+      "@styles/*": ["./src/presentation/styles/*"],
+      "@admin/*": ["./src/presentation/admin/*"]
     },
 
     /* Linting */

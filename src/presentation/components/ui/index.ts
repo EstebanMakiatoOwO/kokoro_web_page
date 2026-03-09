@@ -1,3 +1,8 @@
 export { Button } from './Button/index.ts'
 export { Badge } from './Badge/index.ts'
 export { Icon } from './Icon/index.ts'
+export { Input } from './Input/index.ts'
+export { Textarea } from './Textarea/index.ts'
+export { Switch } from './Switch/index.ts'
+export { Modal } from './Modal/index.ts'
+export { Select } from './Select/index.ts'
