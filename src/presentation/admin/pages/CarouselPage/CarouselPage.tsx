@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Plus, Pencil, Trash2 } from 'lucide-react'
+import { ArrowLeft, Plus, Pencil, Trash2 } from 'lucide-react'
 import { Button, Icon, Modal, Switch } from '@components/ui/index.ts'
 import { DataTable } from '../../components/DataTable/index.ts'
 import { SlideForm } from './SlideForm.tsx'
@@ -36,6 +36,9 @@ export function CarouselPage() {
   if (view === 'create') {
     return (
       <div>
+        <button onClick={() => setView('list')} className="flex items-center gap-1.5 text-sm text-kokoro-muted hover:text-kokoro-text transition-colors mb-4">
+          <Icon icon={ArrowLeft} size={16} /> Volver a slides
+        </button>
         <h2 className="font-heading text-2xl font-semibold text-kokoro-text mb-6">Nuevo slide</h2>
         <SlideForm onSubmit={handleCreate} onCancel={() => setView('list')} />
       </div>
@@ -45,6 +48,9 @@ export function CarouselPage() {
   if (view === 'edit' && editing) {
     return (
       <div>
+        <button onClick={() => { setView('list'); setEditing(undefined) }} className="flex items-center gap-1.5 text-sm text-kokoro-muted hover:text-kokoro-text transition-colors mb-4">
+          <Icon icon={ArrowLeft} size={16} /> Volver a slides
+        </button>
         <h2 className="font-heading text-2xl font-semibold text-kokoro-text mb-6">Editar slide</h2>
         <SlideForm slide={editing} onSubmit={handleUpdate} onCancel={() => { setView('list'); setEditing(undefined) }} />
       </div>
