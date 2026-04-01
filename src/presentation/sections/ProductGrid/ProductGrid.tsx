@@ -99,6 +99,7 @@ export function ProductGrid() {
     <section
       ref={sectionRef}
       id="products"
+      aria-label="Catálogo de productos KOKORO"
       className="section-padding bg-kokoro-bg"
     >
       <div className="max-w-7xl mx-auto px-6">

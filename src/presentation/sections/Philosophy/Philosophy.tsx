@@ -34,6 +34,7 @@ export function Philosophy() {
     <section
       ref={sectionRef}
       id="philosophy"
+      aria-label="Sobre nosotros — Filosofía KOKORO"
       className="section-padding bg-kokoro-surface overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-6">

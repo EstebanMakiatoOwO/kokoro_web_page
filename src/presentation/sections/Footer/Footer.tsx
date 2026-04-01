@@ -1,5 +1,5 @@
 import { m } from 'framer-motion'
-import { Instagram, Twitter, Link2 } from 'lucide-react'
+import { Instagram, Facebook, MessageCircle } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { Icon } from '@components/ui/index.ts'
 import { FOOTER_COLUMNS, SOCIAL_LINKS } from '@application/constants/index.ts'
@@ -9,8 +9,10 @@ import type { SocialLink } from '@domain/types/index.ts'
 
 const SOCIAL_ICON_MAP: Record<SocialLink['platform'], LucideIcon> = {
   instagram: Instagram,
-  twitter: Twitter,
-  pinterest: Link2,
+  facebook: Facebook,
+  whatsapp: MessageCircle,
+  pinterest: Instagram,
+  twitter: Instagram,
 }
 
 export function Footer() {

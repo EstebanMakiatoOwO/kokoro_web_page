@@ -9,7 +9,7 @@ export interface FooterColumn {
 }
 
 export interface SocialLink {
-  readonly platform: 'instagram' | 'pinterest' | 'twitter'
+  readonly platform: 'instagram' | 'facebook' | 'whatsapp' | 'pinterest' | 'twitter'
   readonly href: string
   readonly label: string
 }
