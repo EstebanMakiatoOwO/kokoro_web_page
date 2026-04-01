@@ -211,7 +211,10 @@ function ProductCard({ product }: ProductCardProps) {
         <m.img
           src={product.imageUrl}
           alt={`${product.name} — ${product.category} | KOKORO Cosméticos`}
+          width={400}
+          height={300}
           loading="lazy"
+          decoding="async"
           className="w-full h-full object-cover"
           whileHover={{ scale: 1.04 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
