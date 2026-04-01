@@ -43,6 +43,8 @@ export function Carousel() {
             <img
               src={slide.imageUrl}
               alt={slide.title}
+              loading="eager"
+              fetchPriority="high"
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-linear-to-r from-black/50 to-transparent" />

@@ -133,6 +133,31 @@ export function ProductGrid() {
           ))}
         </div>
 
+        {/* JSON-LD de productos para SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'ItemList',
+              name: 'Productos KOKORO',
+              itemListElement: products.map((p, i) => ({
+                '@type': 'ListItem',
+                position: i + 1,
+                item: {
+                  '@type': 'Product',
+                  name: p.name,
+                  description: p.subtitle,
+                  image: p.imageUrl,
+                  category: p.category,
+                  brand: { '@type': 'Brand', name: 'KOKORO' },
+                  ...(p.price ? { offers: { '@type': 'Offer', price: p.price.replace(/[^0-9.]/g, ''), priceCurrency: 'MXN', availability: 'https://schema.org/InStock' } } : {}),
+                },
+              })),
+            }),
+          }}
+        />
+
         {/* Product cards */}
         <AnimatePresence mode="wait">
           <m.div
@@ -185,7 +210,8 @@ function ProductCard({ product }: ProductCardProps) {
       <div className="relative overflow-hidden aspect-4/3">
         <m.img
           src={product.imageUrl}
-          alt={product.name}
+          alt={`${product.name} — ${product.category} | KOKORO Cosméticos`}
+          loading="lazy"
           className="w-full h-full object-cover"
           whileHover={{ scale: 1.04 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
