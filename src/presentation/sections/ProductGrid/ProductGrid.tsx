@@ -151,7 +151,14 @@ export function ProductGrid() {
                   image: p.imageUrl,
                   category: p.category,
                   brand: { '@type': 'Brand', name: 'KOKORO' },
-                  ...(p.price ? { offers: { '@type': 'Offer', price: p.price.replace(/[^0-9.]/g, ''), priceCurrency: 'MXN', availability: 'https://schema.org/InStock' } } : {}),
+                  offers: {
+                    '@type': 'Offer',
+                    price: p.price ? p.price.replace(/[^0-9.]/g, '') : '0',
+                    priceCurrency: 'MXN',
+                    availability: 'https://schema.org/InStock',
+                    seller: { '@type': 'Organization', name: 'KOKORO Cosméticos' },
+                    url: 'https://kokorocosmetic.com.mx/',
+                  },
                 },
               })),
             }),
@@ -215,6 +222,7 @@ function ProductCard({ product }: ProductCardProps) {
           height={300}
           loading="lazy"
           decoding="async"
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
           className="w-full h-full object-cover"
           whileHover={{ scale: 1.04 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}

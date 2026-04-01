@@ -75,10 +75,15 @@ export function Hero() {
         aria-hidden="true"
       >
         <img
-          src="https://picsum.photos/seed/kokoro-hero-bg/1920/1080"
+          src="https://picsum.photos/seed/kokoro-hero-bg/800/450"
+          srcSet="https://picsum.photos/seed/kokoro-hero-bg/640/360 640w, https://picsum.photos/seed/kokoro-hero-bg/1024/576 1024w, https://picsum.photos/seed/kokoro-hero-bg/1920/1080 1920w"
+          sizes="100vw"
           alt=""
           width={1920}
           height={1080}
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
           className="w-full h-full object-cover opacity-20"
         />
       </div>
