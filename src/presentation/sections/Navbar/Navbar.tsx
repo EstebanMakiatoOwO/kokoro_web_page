@@ -34,7 +34,7 @@ export function Navbar() {
       <nav className="max-w-7xl mx-auto px-6 flex items-center justify-between" aria-label="Navegación principal">
         {/* Logo */}
         <a href="#hero" className="flex items-baseline gap-2 group">
-          <img src={`${import.meta.env.BASE_URL}Kokoro_logo_letras.png`} alt={BRAND_IDENTITY.name} className='h-7 w-auto'/>
+          <img src={`${import.meta.env.BASE_URL}Kokoro_logo_letras.png`} alt={BRAND_IDENTITY.name} width={120} height={28} className='h-7 w-auto'/>
         </a>
 
         {/* Desktop navigation */}

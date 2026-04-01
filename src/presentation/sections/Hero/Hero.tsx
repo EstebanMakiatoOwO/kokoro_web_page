@@ -77,6 +77,8 @@ export function Hero() {
         <img
           src="https://picsum.photos/seed/kokoro-hero-bg/1920/1080"
           alt=""
+          width={1920}
+          height={1080}
           className="w-full h-full object-cover opacity-20"
         />
       </div>

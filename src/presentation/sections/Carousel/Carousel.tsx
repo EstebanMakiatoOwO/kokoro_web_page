@@ -43,6 +43,8 @@ export function Carousel() {
             <img
               src={slide.imageUrl}
               alt={slide.title}
+              width={1200}
+              height={400}
               loading="eager"
               fetchPriority="high"
               className="w-full h-full object-cover"

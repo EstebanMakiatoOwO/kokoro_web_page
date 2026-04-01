@@ -36,7 +36,7 @@ export function Footer() {
           {/* Brand column */}
           <m.div variants={staggerItem}>
             <div className="flex items-baseline gap-3 mb-4">
-              <img src={`${import.meta.env.BASE_URL}Kokoro_logo_letras.png`} alt={BRAND_IDENTITY.name} className='h-7 w-auto'/>
+              <img src={`${import.meta.env.BASE_URL}Kokoro_logo_letras.png`} alt={BRAND_IDENTITY.name} width={120} height={28} className='h-7 w-auto'/>
             </div>
             <p className="text-white/50 text-sm leading-relaxed max-w-xs">
               {BRAND_IDENTITY.tagline}
