@@ -215,6 +215,7 @@ function ProductCard({ product }: ProductCardProps) {
           height={300}
           loading="lazy"
           decoding="async"
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
           className="w-full h-full object-cover"
           whileHover={{ scale: 1.04 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
