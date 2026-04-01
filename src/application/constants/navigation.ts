@@ -28,6 +28,6 @@ export const FOOTER_COLUMNS: readonly FooterColumn[] = [
 
 export const SOCIAL_LINKS: readonly SocialLink[] = [
   { platform: 'instagram', href: '#', label: 'Instagram' },
-  { platform: 'pinterest', href: '#', label: 'Pinterest' },
-  { platform: 'twitter', href: '#', label: 'Twitter / X' },
+  { platform: 'facebook', href: '#', label: 'Facebook' },
+  { platform: 'whatsapp', href: '#', label: 'WhatsApp' },
 ] as const

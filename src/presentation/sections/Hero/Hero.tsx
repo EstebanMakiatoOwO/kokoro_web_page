@@ -65,6 +65,7 @@ export function Hero() {
     <section
       ref={sectionRef}
       id="hero"
+      aria-label="Bienvenida — KOKORO Cosméticos"
       className="relative min-h-screen flex items-center overflow-hidden bg-kokoro-bg"
     >
       {/* Background image with parallax */}
